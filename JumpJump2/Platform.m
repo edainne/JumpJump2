@@ -35,7 +35,8 @@
     
     maximumX = platformPosition.x - platformSize.width/2;
     minimumX = platformPosition.x + platformSize.width/2;
-    
+
+        
     float minimumY = platformPosition.y + (platformSize.height + playerSize.height/2 - kPlatformTopPadding);
     
     if (pPosition.x > maximumX &&

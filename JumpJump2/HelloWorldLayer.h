@@ -15,9 +15,10 @@
 @interface HelloWorldLayer : CCLayer <UIAccelerometerDelegate>
 {
     PlatformManager *platformManager;
-    Player *player;
+    Player *player1;
     
     CGPoint pVelocity;
+    UIAccelerometer *accelerometer;
 }
 
 @property (retain, nonatomic) PlatformManager *platformManager;

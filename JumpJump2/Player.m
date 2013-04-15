@@ -22,7 +22,7 @@
 -(void) resetPlayer
 {
    CCSprite *player = [CCSprite spriteWithFile:@"Icon copy.png"];
-    player = (CCSprite *) [self getChildByTag:playerTag];
+     [self addChild:player z: 3 tag:playerTag];
     playerPosition.x = 160;
     playerPosition.y = 160;
     player.position = playerPosition;
@@ -47,7 +47,7 @@
 	playerVelocity.y = 350.0f + fabsf(playerVelocity.x);
 }
 
--(void) update:(ccTime)dt
+-(void) updatePlayer:(ccTime)dt
 {
     CCSprite *player = [CCSprite spriteWithFile:@"Icon copy.png"];
     [self addChild:player z:10 tag: playerTag];
@@ -68,5 +68,4 @@
     playerPosition.y += playerVelocity.y * dt;
     
 }
-
 @end

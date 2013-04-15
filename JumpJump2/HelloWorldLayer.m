@@ -34,16 +34,18 @@
     platformManager.platformsStartTag = 200;
     NSLog(@"%@", platformManager.description);
     
-    int playerTag = player.playerTag;
-    player = [[Player alloc] init];
-    player = [CCSprite spriteWithFile:@"Icon copy.png"];
-    [self addChild:player z:10 tag: playerTag];
-    NSLog(@"%@", player.description);
+    int playerTag = player1.playerTag;
+    player1 = [[Player alloc] init];
+//    CCSprite *player = [CCSprite spriteWithFile:@"Icon copy.png"];
+//    [self addChild:player z:10 tag: playerTag];
+
+    [self addChild:player1];
+        NSLog(@"%@", player1.description);
 
     [platformManager createPlatforms];
-    [player resetPlayer];
-    pVelocity = player.playerVelocity;
-    [self schedule:@selector(update:)];
+    [player1 resetPlayer];
+    pVelocity = player1.playerVelocity;
+    [player1 schedule:@selector(updatePlayer:)];
     
     _accelerometerEnabled = YES;
     _touchEnabled = NO;
@@ -52,8 +54,11 @@
     
     
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 60.0)];
+    [[UIAccelerometer sharedAccelerometer] setDelegate:self];
 	return self;
 }
+
+
 
 - (void) dealloc
 {
@@ -69,7 +74,7 @@
 -(void) gameStart
 {
 	[platformManager resetPlatforms];
-	[player resetPlayer];
+	[player1 resetPlayer];
     
 	[[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 }

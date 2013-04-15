@@ -16,7 +16,7 @@
     
     int playerTag;
     
-    UIAccelerometer *accelerometer;
+
     
     CGSize playerSize;
     float maximumX;
@@ -35,5 +35,5 @@
 - (void) initializePlayer;
 - (void) resetPlayer;
 - (void) playerJump;
-- (void) update:(ccTime) dt;
+- (void) updatePlayer:(ccTime) dt;
 @end
