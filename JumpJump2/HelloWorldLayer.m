@@ -31,10 +31,10 @@
     
     platformManager = [[PlatformManager alloc] init];
     [self addChild:platformManager];
-    platformManager.platformsStartTag = 200;
+    platformManager.platformsStartTag = 0;
     NSLog(@"%@", platformManager.description);
     
-    int playerTag = player1.playerTag;
+//    int playerTag = player1.playerTag;
     player1 = [[Player alloc] init];
 //    CCSprite *player = [CCSprite spriteWithFile:@"Icon copy.png"];
 //    [self addChild:player z:10 tag: playerTag];
@@ -44,8 +44,7 @@
 
     [platformManager createPlatforms];
     [player1 resetPlayer];
-    pVelocity = player1.playerVelocity;
-    [player1 schedule:@selector(updatePlayer:)];
+    [self schedule:@selector(update:)];
     
     _accelerometerEnabled = YES;
     _touchEnabled = NO;
@@ -66,11 +65,6 @@
 	[super dealloc];
 }
 
-- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
-{
-	float accel_filter = 0.1f;
-    pVelocity.x = pVelocity.x * accel_filter + acceleration.x * (1.0f - accel_filter) * 500.0f;
-}
 -(void) gameStart
 {
 	[platformManager resetPlatforms];
@@ -78,4 +72,29 @@
     
 	[[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 }
+
+-(void) update:(ccTime)delta
+{
+    NSLog(@"Update helloworld");
+    [player1 updatePlayer:delta];
+    [platformManager updatePlatforms:player1];
+    Platform* platform = [platformManager platformDidHitPlayer:player1];
+    if (platform != NULL) {
+        [player1 playerJump];
+    }
+}
+- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
+{
+
+	[player1 accelerometer:accelerometer didAccelerate:acceleration];
+
+//    
+//float deceleration = 0.1f, sensitivity = 8.0f, maxVelocity = 150;
+//
+//// adjust velocity based on current accelerometer acceleration
+//  pv.x = pv.x * deceleration + acceleration.x * sensitivity;
+////limit the maximum velocity of the player sprite, in both directions (positive & negative values)
+//pv.x = fmaxf(fminf(pv.x, maxVelocity), -maxVelocity);
+}
+
 @end

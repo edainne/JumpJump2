@@ -16,17 +16,18 @@
     
     int playerTag;
     
-
-    
     CGSize playerSize;
     float maximumX;
     float minimumX;
 
+    CCSprite *player;
+    
+    UIAccelerometer *accelerometer;
 }
 
 @property (assign, nonatomic)   int playerTag;
 @property (assign, nonatomic)   CGPoint playerPosition;
-@property (assign, nonatomic)	CGPoint playerVelocity;
+@property (readwrite, nonatomic)	CGPoint playerVelocity;
 @property (assign, nonatomic)	CGPoint playerAcc;
 @property (assign, nonatomic)   CGSize playerSize;
 @property (assign, nonatomic)   float maximumX;
@@ -36,4 +37,7 @@
 - (void) resetPlayer;
 - (void) playerJump;
 - (void) updatePlayer:(ccTime) dt;
+- (void) resetPosition;
+- (CGPoint) playerVelocityX;
+- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration;
 @end

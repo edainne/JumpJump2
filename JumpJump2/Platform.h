@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "PlatformManager.h"
-
+#import "Player.h"
+@class PlatformManager;
 @interface Platform : CCSprite
 {
     PlatformManager * parent;
@@ -29,5 +29,5 @@
 @property (retain, nonatomic) PlatformManager * parent;
 @property (retain, nonatomic) Player * player;
 
--(void) didCollideWithPlayer : (Player *) player1;
+-(BOOL) didCollideWithPlayer : (Player *) player1;
 @end

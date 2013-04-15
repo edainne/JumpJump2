@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Player.h"
+#import "Platform.h"
 #define kMinPlatformStep	50
 #define kMaxPlatformStep	100
 #define kNumPlatforms		20
@@ -26,6 +27,8 @@
     
     BOOL hit;
     
+    NSMutableArray *platforms;
+    
     CGPoint pVelocity;
     CGPoint pPosition;
 }
@@ -33,6 +36,8 @@
 -(void) createPlatforms;
 -(void) resetPlatforms;
 -(void) resetPlatform;
+-(void) updatePlatforms : (Player *) player1;
+-(Platform*) platformDidHitPlayer : (Player *) player;
 
 @property (assign, nonatomic)   float currentPlatformY;
 @property (assign, nonatomic)	float currentMaxPlatformStep;

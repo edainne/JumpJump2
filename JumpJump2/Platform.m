@@ -13,39 +13,32 @@
 @synthesize parent, player;
 -(id) init
 {
-    if(![super init]) return nil;
-    pVelocity = player.playerVelocity;
-    pPosition = player.playerPosition;
-
+    if(![super initWithFile:@"platform.png"]) return nil;
     pst = parent.platformsStartTag;
     cpt = parent.currentPlatformTag;
     cpY = parent.currentPlatformY;
 	return self;
 }
 
--(void) didCollideWithPlayer : (Player *) player1
+-(BOOL) didCollideWithPlayer : (Player *) player1
 {
-    if (parent.hit) {
-    player1 = player;
-    int t = parent.t;
-    CCSprite *platform = (CCSprite*)[self getChildByTag:t];
     
-    CGSize platformSize = platform.contentSize;
-    CGPoint platformPosition = platform.position;
+    CGSize platformSize = self.contentSize;
+    CGPoint platformPosition = self.position;
     
     maximumX = platformPosition.x - platformSize.width/2;
     minimumX = platformPosition.x + platformSize.width/2;
 
         
-    float minimumY = platformPosition.y + (platformSize.height + playerSize.height/2 - kPlatformTopPadding);
+    float minimumY = platformPosition.y + (platformSize.height + 15 + playerSize.height/2 - kPlatformTopPadding);
     
-    if (pPosition.x > maximumX &&
-        pPosition.x < minimumX &&
-        pPosition.y > platformPosition.y &&
-        pPosition.y < minimumY) {
-        [player playerJump];
+    if (player1.playerPosition.x > maximumX &&
+        player1.playerPosition.x < minimumX &&
+        player1.playerPosition.y > platformPosition.y &&
+        player1.playerPosition.y < minimumY) {
+        return YES;
     }
-    }
+    return NO;
 }
 
 @end

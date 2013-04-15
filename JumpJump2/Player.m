@@ -18,13 +18,18 @@
             maximumX,
             minimumX;
 
-
+-(id) init
+{
+    if (self = [super init]) {
+        [self initializePlayer];
+    }
+    
+    return self;
+}
 -(void) resetPlayer
 {
-   CCSprite *player = [CCSprite spriteWithFile:@"Icon copy.png"];
-     [self addChild:player z: 3 tag:playerTag];
     playerPosition.x = 160;
-    playerPosition.y = 160;
+    playerPosition.y = 1000;
     player.position = playerPosition;
     
     playerVelocity.x = 0;
@@ -37,7 +42,7 @@
 -(void) initializePlayer
 {
     playerTag = 199;
-    CCSprite *player = (CCSprite*)[CCSprite spriteWithFile:@"Icon copy.png"];
+    player = (CCSprite*)[CCSprite spriteWithFile:@"Icon copy.png"];
     [self addChild:player z:1000 tag:playerTag];
 
 }
@@ -49,8 +54,7 @@
 
 -(void) updatePlayer:(ccTime)dt
 {
-    CCSprite *player = [CCSprite spriteWithFile:@"Icon copy.png"];
-    [self addChild:player z:10 tag: playerTag];
+    NSLog(@"update player");
     playerPosition.x += playerVelocity.x * dt;
     
     playerSize = player.contentSize;
@@ -66,6 +70,28 @@
     
     playerVelocity.y += playerAcc.y * dt;
     playerPosition.y += playerVelocity.y * dt;
+
+    player.position = playerPosition;
     
+    [self scheduleUpdate];
+}
+-(void) resetPosition
+{
+    playerPosition.y = 240;
+    player.position = playerPosition;
+}
+- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
+{
+    
+	float accel_filter = 0.1f;
+    playerVelocity.x = playerVelocity.x * accel_filter + acceleration.x * (1.0f - accel_filter) * 500.0f;
+    
+    //
+    //float deceleration = 0.1f, sensitivity = 8.0f, maxVelocity = 150;
+    //
+    //// adjust velocity based on current accelerometer acceleration
+    //  pv.x = pv.x * deceleration + acceleration.x * sensitivity;
+    ////limit the maximum velocity of the player sprite, in both directions (positive & negative values)
+    //pv.x = fmaxf(fminf(pv.x, maxVelocity), -maxVelocity);
 }
 @end

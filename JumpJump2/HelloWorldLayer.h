@@ -16,8 +16,7 @@
 {
     PlatformManager *platformManager;
     Player *player1;
-    
-    CGPoint pVelocity;
+
     UIAccelerometer *accelerometer;
 }
 

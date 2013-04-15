@@ -5,9 +5,7 @@
 //  Created by Edainne Ladys S. Silva on 4/11/13.
 //  Copyright (c) 2013 Edainne Ladys S. Silva. All rights reserved.
 //
-#import "cocos2d.h"
 #import "PlatformManager.h"
-#import "Player.h"
 @implementation PlatformManager
 
 @synthesize currentPlatformY,
@@ -31,11 +29,13 @@
 }
 -(void) createPlatforms
 {
-	
+	platforms = [[NSMutableArray alloc] init];
     currentPlatformTag = platformsStartTag;
 	while (currentPlatformTag < platformsStartTag + kNumPlatforms)
     {
-		[self initializePlatform];
+        Platform *platform = [[Platform alloc]init];
+        [platforms addObject:platform];
+        [self addChild:platform];
 		currentPlatformTag++;
 	}
 	[self resetPlatforms];
@@ -72,11 +72,13 @@
         }
     }
     
-    CCSprite *platform1 = [CCSprite spriteWithFile:@"platform.png"];
-    platform1 = (CCSprite*)[self getChildByTag:currentPlatformTag];
+//    CCSprite *platform1 = [CCSprite spriteWithFile:@"platform.png"];
+//    platform1 = (CCSprite*)[self getChildByTag:currentPlatformTag];
+    
+    Platform *platform = platforms [currentPlatformTag];
     
 	float x;
-	CGSize size = platform1.contentSize;
+	CGSize size = platform.contentSize;
     
 	if(currentPlatformY == 30.0f)
     {
@@ -87,29 +89,28 @@
 		x = random() % (320-(int)size.width) + size.width/2;
 	}
 	
-	platform1.position = ccp(x,currentPlatformY);
+	platform.position = ccp(x,currentPlatformY);
 	platformCount++;
 }
--(void) platformHitsPlayer : (Player *) player1
+-(void) updatePlatforms : (Player *) player1
 {
-    player1 = player;
     
-    if (pVelocity.y < 0) {
+    if (player1.playerVelocity.y < 0) {
         t = platformsStartTag;
         for (t ; t < platformsStartTag + kNumPlatforms; t++)
             hit = YES;
     }
-    else if (pPosition.y > 240)
+    else if (player1.playerPosition.y > 240)
     {
-    float delta = pPosition.y - 240;
-    pPosition.y = 240;
+    float delta = player1.playerPosition.y - 240;
+        [player1 resetPosition];
     
     currentPlatformY -= delta;
     
     t = t = platformsStartTag;
     
     for(t; t < platformsStartTag + kNumPlatforms; t++) {
-        CCSprite *platform = (CCSprite *)[self getChildByTag:t];
+        Platform *platform = platforms [t];
         CGPoint pos = platform.position;
         pos = ccp(pos.x, pos.y - delta);
         if (pos.y <-platform.contentSize.height/2) {
@@ -123,5 +124,16 @@
 }
 //player.position = playerPosition;
 //[self updatePlayerPosition:playerPosition];
+}
+-(Platform*) platformDidHitPlayer : (Player *) player1
+{
+    for (int i = 0; i < platforms.count; i++) {
+        Platform *platform = platforms [i];
+        if ([platform didCollideWithPlayer:player1]) {
+            return platform;
+        }
+    
+    }
+    return NULL;
 }
 @end
