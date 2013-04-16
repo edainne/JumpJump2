@@ -144,6 +144,10 @@
 		B0D1C34717179A4E001B516D /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D1C34617179A4E001B516D /* Player.m */; };
 		B0D1C3491717BA96001B516D /* platform.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D1C3481717BA96001B516D /* platform.png */; };
 		B0D1C34B1717DDAE001B516D /* Icon copy.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D1C34A1717DDAE001B516D /* Icon copy.png */; };
+		B0FA993B171D217D008999E6 /* GUI.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FA993A171D217D008999E6 /* GUI.m */; };
+		B0FA993E171D40FD008999E6 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FA993D171D40FD008999E6 /* SceneManager.m */; };
+		B0FA9941171D4123008999E6 /* GameOver.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FA9940171D4123008999E6 /* GameOver.m */; };
+		B0FA9944171D4142008999E6 /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FA9943171D4142008999E6 /* MainMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -433,6 +437,14 @@
 		B0D1C34617179A4E001B516D /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		B0D1C3481717BA96001B516D /* platform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = platform.png; sourceTree = "<group>"; };
 		B0D1C34A1717DDAE001B516D /* Icon copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon copy.png"; sourceTree = "<group>"; };
+		B0FA9939171D217D008999E6 /* GUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUI.h; sourceTree = "<group>"; };
+		B0FA993A171D217D008999E6 /* GUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUI.m; sourceTree = "<group>"; };
+		B0FA993C171D40FD008999E6 /* SceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneManager.h; sourceTree = "<group>"; };
+		B0FA993D171D40FD008999E6 /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneManager.m; sourceTree = "<group>"; };
+		B0FA993F171D4123008999E6 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOver.h; sourceTree = "<group>"; };
+		B0FA9940171D4123008999E6 /* GameOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOver.m; sourceTree = "<group>"; };
+		B0FA9942171D4142008999E6 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
+		B0FA9943171D4142008999E6 /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -493,14 +505,22 @@
 			children = (
 				B0731BED1716B4ED00A2DEE5 /* AppDelegate.h */,
 				B0731BEE1716B4ED00A2DEE5 /* AppDelegate.m */,
+				B0FA993C171D40FD008999E6 /* SceneManager.h */,
+				B0FA993D171D40FD008999E6 /* SceneManager.m */,
+				B0FA9942171D4142008999E6 /* MainMenu.h */,
+				B0FA9943171D4142008999E6 /* MainMenu.m */,
 				B0731BF01716B4ED00A2DEE5 /* HelloWorldLayer.h */,
 				B0731BF11716B4ED00A2DEE5 /* HelloWorldLayer.m */,
 				B0731BFE1716B81E00A2DEE5 /* PlatformManager.h */,
 				B0731BFF1716B81E00A2DEE5 /* PlatformManager.m */,
+				B0FA9939171D217D008999E6 /* GUI.h */,
+				B0FA993A171D217D008999E6 /* GUI.m */,
 				B0731C011716B85500A2DEE5 /* Platform.h */,
 				B0731C021716B85500A2DEE5 /* Platform.m */,
 				B0D1C34517179A4E001B516D /* Player.h */,
 				B0D1C34617179A4E001B516D /* Player.m */,
+				B0FA993F171D4123008999E6 /* GameOver.h */,
+				B0FA9940171D4123008999E6 /* GameOver.m */,
 				B0731BF31716B4ED00A2DEE5 /* IntroLayer.h */,
 				B0731BF41716B4ED00A2DEE5 /* IntroLayer.m */,
 				B0731A601716B4E800A2DEE5 /* Resources */,
@@ -1080,6 +1100,10 @@
 				B0731C001716B81E00A2DEE5 /* PlatformManager.m in Sources */,
 				B0731C031716B85500A2DEE5 /* Platform.m in Sources */,
 				B0D1C34717179A4E001B516D /* Player.m in Sources */,
+				B0FA993B171D217D008999E6 /* GUI.m in Sources */,
+				B0FA993E171D40FD008999E6 /* SceneManager.m in Sources */,
+				B0FA9941171D4123008999E6 /* GameOver.m in Sources */,
+				B0FA9944171D4142008999E6 /* MainMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

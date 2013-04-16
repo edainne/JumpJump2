@@ -25,7 +25,7 @@
 
 @property (assign, nonatomic)   int playerTag;
 @property (assign, nonatomic)   CGPoint playerPosition;
-@property (readwrite)	CGPoint playerVelocity;
+@property (assign, nonatomic)	CGPoint playerVelocity;
 @property (assign, nonatomic)	CGPoint playerAcc;
 @property (assign, nonatomic)   CGSize playerSize;
 @property (assign, nonatomic)   float maximumX;
@@ -36,6 +36,6 @@
 - (void) playerJump;
 - (void) updatePlayer:(ccTime) dt;
 - (void) resetPosition;
-- (float) setPlayerVel;
+- (BOOL) playerDied;
 
 @end

@@ -7,15 +7,19 @@
 //
 
 #import <GameKit/GameKit.h>
+#import "SceneManager.h"
 #import "PlatformManager.h"
 #import "cocos2d.h"
 #import "Player.h"
 #import "Platform.h"
+#import "GUI.h"
+
 
 @interface HelloWorldLayer : CCLayer <UIAccelerometerDelegate>
 {
     PlatformManager *platformManager;
     Player *player1;
+    GUI *gui;
     CGPoint pv;
 
     UIAccelerometer *accelerometer;

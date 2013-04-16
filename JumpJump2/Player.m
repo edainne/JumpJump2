@@ -54,6 +54,7 @@
 {
     NSLog(@"jump");
 	playerVelocity.y = 350.0f + fabsf(playerVelocity.x);
+    
 }
 
 -(void) updatePlayer:(ccTime)dt
@@ -86,14 +87,18 @@
 
 -(void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
-    float deceleration = 0.1f, sensitivity = 8.0f, maxVelocity = 150;
-    
-//    // adjust velocity based on current accelerometer acceleration
-//    playerVelocity.x = playerVelocity.x * deceleration + acceleration.x * sensitivity;
-//    
-//    //limit the maximum velocity of the player sprite, in both directions (positive & negative values)
-//    playerVelocity.x = fmaxf(fminf(playerVelocity.x, maxVelocity), -maxVelocity);
+
     float accel_filter = 0.1f;
     playerVelocity.x = playerVelocity.x * accel_filter + acceleration.x * (1.0f - accel_filter) * 500.0f;
+}
+
+-(BOOL) playerDied
+{
+    player.position = playerPosition;
+    if (playerPosition.y + player.boundingBox.size.height/2 + 10 < 0)
+    {
+        return YES;
+    }
+    return NO;
 }
 @end

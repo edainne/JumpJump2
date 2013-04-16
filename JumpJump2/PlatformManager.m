@@ -71,10 +71,7 @@
 			currentMaxPlatformStep += 0.5f;
         }
     }
-    
-//    CCSprite *platform1 = [CCSprite spriteWithFile:@"platform.png"];
-//    platform1 = (CCSprite*)[self getChildByTag:currentPlatformTag];
-    
+
     Platform *platform = platforms [currentPlatformTag];
     
 	float x;
@@ -103,10 +100,11 @@
     else if (player1.playerPosition.y > 240)
     {
     float delta = player1.playerPosition.y - 240;
-        [player1 resetPosition];
+        [player1 resetPosition]; 
     
     currentPlatformY -= delta;
     
+        
     t = t = platformsStartTag;
     
     for(t; t < platformsStartTag + kNumPlatforms; t++) {
@@ -122,8 +120,7 @@
     }
     
 }
-//player.position = playerPosition;
-//[self updatePlayerPosition:playerPosition];
+
 }
 -(Platform*) platformDidHitPlayer : (Player *) player1
 {

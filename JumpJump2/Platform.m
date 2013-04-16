@@ -14,9 +14,7 @@
 -(id) init
 {
     if(![super initWithFile:@"platform.png"]) return nil;
-    pst = parent.platformsStartTag;
-    cpt = parent.currentPlatformTag;
-    cpY = parent.currentPlatformY;
+
 	return self;
 }
 

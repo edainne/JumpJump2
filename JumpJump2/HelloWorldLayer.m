@@ -25,31 +25,30 @@
 -(id) init
 {
     if(![super init]) return nil;
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+
+    
+    gui = [[GUI alloc] init];
+    [self addChild:gui];
     
     platformManager = [[PlatformManager alloc] init];
     [self addChild:platformManager];
     platformManager.platformsStartTag = 0;
     NSLog(@"%@", platformManager.description);
 
-//    int playerTag = player1.playerTag;
     player1 = [[Player alloc] init];
-//    CCSprite *player = [CCSprite spriteWithFile:@"Icon copy.png"];
-//    [self addChild:player z:10 tag: playerTag];
-
     [self addChild:player1];
-        NSLog(@"%@", player1.description);
+    NSLog(@"%@", player1.description);
 
+    
     [platformManager createPlatforms];
     [player1 resetPlayer];
     [self schedule:@selector(update:)];
+    
     _accelerometerEnabled = YES;
     _touchEnabled = NO;
  
     [self gameStart];
-    
-    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 60.0)];
-    [[UIAccelerometer sharedAccelerometer] setDelegate:self];
-
 	return self;
 }
 
@@ -71,18 +70,35 @@
 
 -(void) update:(ccTime)delta
 {
-
+    
     [player1 updatePlayer:delta];
     [platformManager updatePlatforms:player1];
     Platform* platform = [platformManager platformDidHitPlayer:player1];
+    
+    gui.playerPoints += 1;
+    [self updateScore:gui.playerPoints];
     if (platform != NULL) {
         [player1 playerJump];
+            
     }
+    if ([player1 playerDied]) {
+        [self unscheduleAllSelectors];
+        [self unschedule:@selector(updateScore:)];
+        gui.finalPlayerPoints = gui.playerPoints;
+        NSLog(@"points : %d", gui.finalPlayerPoints);
+        
+        GameOver *go = [[GameOver alloc] init];
+        [go displayScore:gui.finalPlayerPoints];
+        [SceneManager goToGameOver];
+    }
+
 }
 
-- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
+-(int) updateScore : (NSInteger) newScore
 {
-    float accel_filter = 0.1f;
-    pv.x = pv.x * accel_filter + acceleration.x * (1.0f - accel_filter) * 500.0f;
+    gui.playerPoints = newScore;
+    [gui.scoreLabel setString:[NSString stringWithFormat:@"%d", gui.playerPoints]];
+    NSLog(@"points : %d", gui.finalPlayerPoints);
+    return gui.playerPoints;
 }
 @end

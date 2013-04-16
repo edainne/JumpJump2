@@ -17,10 +17,7 @@
     
     CGPoint pVelocity;
     CGPoint pPosition;
-    
-    int pst;
-    int cpt;
-    int cpY;
+
     
     float minimumX;
     float maximumX;
