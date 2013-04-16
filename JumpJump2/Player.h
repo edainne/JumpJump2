@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-@interface Player : CCSprite
+@interface Player : CCLayer
 {
     CGPoint playerPosition;
 	CGPoint playerVelocity;
@@ -21,13 +21,11 @@
     float minimumX;
 
     CCSprite *player;
-    
-    UIAccelerometer *accelerometer;
 }
 
 @property (assign, nonatomic)   int playerTag;
 @property (assign, nonatomic)   CGPoint playerPosition;
-@property (readwrite, nonatomic)	CGPoint playerVelocity;
+@property (readwrite)	CGPoint playerVelocity;
 @property (assign, nonatomic)	CGPoint playerAcc;
 @property (assign, nonatomic)   CGSize playerSize;
 @property (assign, nonatomic)   float maximumX;
@@ -38,6 +36,6 @@
 - (void) playerJump;
 - (void) updatePlayer:(ccTime) dt;
 - (void) resetPosition;
-- (CGPoint) playerVelocityX;
-- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration;
+- (float) setPlayerVel;
+
 @end

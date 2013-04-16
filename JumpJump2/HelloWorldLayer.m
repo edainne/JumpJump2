@@ -7,10 +7,7 @@
 //
 
 #import "HelloWorldLayer.h"
-#import "PlatformManager.h"
 #import "AppDelegate.h"
-#import "Player.h"
-#import "Platform.h"
 
 #pragma mark - HelloWorldLayer
 
@@ -33,7 +30,7 @@
     [self addChild:platformManager];
     platformManager.platformsStartTag = 0;
     NSLog(@"%@", platformManager.description);
-    
+
 //    int playerTag = player1.playerTag;
     player1 = [[Player alloc] init];
 //    CCSprite *player = [CCSprite spriteWithFile:@"Icon copy.png"];
@@ -45,15 +42,14 @@
     [platformManager createPlatforms];
     [player1 resetPlayer];
     [self schedule:@selector(update:)];
-    
     _accelerometerEnabled = YES;
     _touchEnabled = NO;
-    
+ 
     [self gameStart];
-    
     
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 60.0)];
     [[UIAccelerometer sharedAccelerometer] setDelegate:self];
+
 	return self;
 }
 
@@ -69,13 +65,13 @@
 {
 	[platformManager resetPlatforms];
 	[player1 resetPlayer];
-    
+    pv = player1.playerVelocity;
 	[[UIApplication sharedApplication] setIdleTimerDisabled:YES];
 }
 
 -(void) update:(ccTime)delta
 {
-    NSLog(@"Update helloworld");
+
     [player1 updatePlayer:delta];
     [platformManager updatePlatforms:player1];
     Platform* platform = [platformManager platformDidHitPlayer:player1];
@@ -83,18 +79,10 @@
         [player1 playerJump];
     }
 }
+
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
 {
-
-	[player1 accelerometer:accelerometer didAccelerate:acceleration];
-
-//    
-//float deceleration = 0.1f, sensitivity = 8.0f, maxVelocity = 150;
-//
-//// adjust velocity based on current accelerometer acceleration
-//  pv.x = pv.x * deceleration + acceleration.x * sensitivity;
-////limit the maximum velocity of the player sprite, in both directions (positive & negative values)
-//pv.x = fmaxf(fminf(pv.x, maxVelocity), -maxVelocity);
+    float accel_filter = 0.1f;
+    pv.x = pv.x * accel_filter + acceleration.x * (1.0f - accel_filter) * 500.0f;
 }
-
 @end

@@ -22,6 +22,10 @@
 {
     if (self = [super init]) {
         [self initializePlayer];
+        [self scheduleUpdate];
+        
+        _accelerometerEnabled = YES;
+        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 60.0)];
     }
     
     return self;
@@ -54,12 +58,12 @@
 
 -(void) updatePlayer:(ccTime)dt
 {
-    NSLog(@"update player");
     playerPosition.x += playerVelocity.x * dt;
     
     playerSize = player.contentSize;
     maximumX = 320 - playerSize.width/2;
     minimumX = 0 + playerSize.width/2;
+    
     
     if (playerPosition.x - 57 > maximumX) {
         playerPosition.x = minimumX;
@@ -73,25 +77,23 @@
 
     player.position = playerPosition;
     
-    [self scheduleUpdate];
 }
 -(void) resetPosition
 {
     playerPosition.y = 240;
     player.position = playerPosition;
 }
-- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
+
+-(void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
+    float deceleration = 0.1f, sensitivity = 8.0f, maxVelocity = 150;
     
-	float accel_filter = 0.1f;
+//    // adjust velocity based on current accelerometer acceleration
+//    playerVelocity.x = playerVelocity.x * deceleration + acceleration.x * sensitivity;
+//    
+//    //limit the maximum velocity of the player sprite, in both directions (positive & negative values)
+//    playerVelocity.x = fmaxf(fminf(playerVelocity.x, maxVelocity), -maxVelocity);
+    float accel_filter = 0.1f;
     playerVelocity.x = playerVelocity.x * accel_filter + acceleration.x * (1.0f - accel_filter) * 500.0f;
-    
-    //
-    //float deceleration = 0.1f, sensitivity = 8.0f, maxVelocity = 150;
-    //
-    //// adjust velocity based on current accelerometer acceleration
-    //  pv.x = pv.x * deceleration + acceleration.x * sensitivity;
-    ////limit the maximum velocity of the player sprite, in both directions (positive & negative values)
-    //pv.x = fmaxf(fminf(pv.x, maxVelocity), -maxVelocity);
 }
 @end
